@@ -1,0 +1,9 @@
+*.dat
+.DS_Store
+myScripts/.idea
+*.txt
+myScripts/*.txt
+myScripts/oldScripts/*.txt
+*.json
+myScripts/*.json
+

@@ -31,6 +31,7 @@ The first and the second script ask for the local directory of the blockchain.
 In all the other cases the inputs required are 'first' and 'last'. They refer to number of the first and last file to analyze. Example: for file blk00757.dat the number to input is 0757.
 
 ### Contributors
+- Eugenio Cortesi, CNAM/POLIMI
 - Stefano Secci, CNAM
 - Sami Taktak, CNAM
 

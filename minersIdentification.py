@@ -130,7 +130,7 @@ for directory in listofDirectories:
 
 	m = openAdds()
 
-	abs_file_path = os.getcwd() + + '/' + directory + '/miners.txt'
+	abs_file_path = os.getcwd() + '/' + directory + '/miners.txt'
 
 	with open(abs_file_path, 'w') as outfile:
 		json.dump(m, outfile)

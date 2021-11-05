@@ -11,7 +11,7 @@ import numpy as np
 def getEpochIntervals():   #it is better to calculate delta between epochs in separated pools?
     list = []
     for hopper in rwtPerHoppers:
-        for rwt in rwtPerHoppers[Hopper]:
+        for rwt in rwtPerHoppers[hopper]:
             idx = rwtPerHoppers[hopper].index(rwt)
             if idx > 0:
                 delta = time.mktime(time.strptime(rwt['time'],"%Y-%m-%d %H:%M:%S")) - time.mktime(time.strptime(previous['time'],"%Y-%m-%d %H:%M:%S"))

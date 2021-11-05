@@ -204,7 +204,7 @@ block_list = []
 block_interval = []
 
 for i in range(firstBlock, lastBlock+1):
-	blk = 'blk0%s.dat' %i
+	blk = 'blk%05d.dat' %i
 	block_interval.append(blk)
 
 for file in os.listdir(blocksDirectory): #/home/lip6/.bitcoin/blocks

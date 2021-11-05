@@ -150,7 +150,7 @@ totint = 0
 totdif = 0
 
 for i in range(firstBlock, lastBlock+1):
-    dir = 'res_blk0%s.dat' %i
+    dir = 'res_blk%05d.dat' %i
     interval.append(dir)
 
 for i in a:

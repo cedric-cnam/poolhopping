@@ -35,8 +35,8 @@ def openMiners():
 
 		abs_file_path = os.getcwd() + '/' + directory  + '/miners.txt'
 
-			with open(abs_file_path) as json_file:
-				temp = json.load(json_file)
+		with open(abs_file_path) as json_file:
+			temp = json.load(json_file)
 			json_file.close()
 
 			for group in temp:

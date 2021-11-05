@@ -43,7 +43,7 @@ for i in a:
 for directory in listofDirectories:
     print('NEW DIRECTORY %s' %directory)
 
-    abs_file_path1 = os.getcwd() + directory  + '/allCoinbaseTransa.txt'
+    abs_file_path1 = os.getcwd() + '/' + directory  + '/allCoinbaseTransa.txt'
 
     with open(abs_file_path1) as json_file1:
         coinbaseTransactions = json.load(json_file1)

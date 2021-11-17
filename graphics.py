@@ -846,10 +846,6 @@ with open(file7) as json_file7:
 	roundsPerWindow = simplejson.load(json_file7, object_pairs_hook = collections.OrderedDict)
 json_file7.close()
 
-with open(file9) as json_file9:
-	principalAddresses = simplejson.load(json_file9, object_pairs_hook = collections.OrderedDict)
-json_file9.close()
-
 with open(file10) as json_file10:
 	hoppersEarnings = simplejson.load(json_file10, object_pairs_hook = collections.OrderedDict)
 json_file10.close()

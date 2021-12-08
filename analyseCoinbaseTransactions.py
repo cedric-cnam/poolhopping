@@ -60,7 +60,7 @@ def getMiningPool(transaction):
 		p = 'AntPool'
 	elif '706f6f6c696e2e636f6d' in id:
 		p = 'PoolinPool'
-	elif '4254432e434f4d' in id:
+	elif '4254432e434f4d' in id or '4254432e636f6d' in id or '42697464656572' in id:
 		p = 'BTCPool'
 	elif '48756f4269' in id or '48756f6269' in id:
 		p = 'HuobiPool'

@@ -814,6 +814,54 @@ def salti():
     #plt.xticks(fontsize=20)
     plt.savefig('DesertationRate2.png')
 
+def getPoolMiners():
+
+    countBTC = 0
+    countF2 = 0
+    countAnt = 0
+    countPoolin = 0
+    countHuobi  = 0
+    for miner in allMiners:
+        if len(allMiners[miner]) >= 1 :
+
+            btc = False
+            f2 = False
+            ant = False
+            poolin = False
+            huobi = False
+
+            for h in allHash[miner]:
+                rwt = orderedRWT[h]
+
+                if rwt['nameMP'] == 'PoolinPool':
+                    poolin = True
+                if rwt['nameMP'] == 'F2Pool':
+                    f2 = True
+                if rwt['nameMP'] == 'HuobiPool':
+                    huobi = True
+                if rwt['nameMP'] == 'AntPool':
+                    ant = True
+                if rwt['nameMP'] == 'BTCPool':
+                    btc = True
+            
+            if poolin == True:
+                countPoolin = countPoolin +1
+            if f2 == True:
+                countF2 = countF2 +1
+            if huobi == True:
+                countHuobi = countHuobi +1
+            if ant == True:
+                countAnt = countAnt+1
+            if btc == True:
+                countBTC = countBTC +1
+
+    print('countPoolin %s'%countPoolin)
+    print('countF2 %s'%countF2)
+    print('countHuobi %s'%countHuobi)
+    print('countAnt %s'%countAnt)
+    print('countBTC %s'%countBTC)
+
+
 # -----------------------------------------------------------------------
 
 file1 = os.getcwd() + '/epochsLength.txt'
@@ -932,3 +980,6 @@ del RWTs
 # salti()
 # print('getPoolMiners')
 # getPoolMiners()
+# print('getPoolMiners')
+# getPoolMiners()
+

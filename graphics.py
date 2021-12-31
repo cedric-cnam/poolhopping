@@ -884,7 +884,7 @@ for rwt in RWTs:
         if rwt['txHash'] not in receiversAddresses[receiver]:
             receiversAddresses[receiver].append(rwt['txHash'])
 
-del RWTs
+#del RWTs
 
 c = 0
 for m in allM:
@@ -907,14 +907,28 @@ for m in allM:
 
 gc.collect()
 
-epochsBoxplot()
-getJumpsPerPool()
-getUsersNetwork()
-contaRWT()
-contaIndirizzi()
-contaHoppers()
-baractive()
-boxplotwindow()
-rewards()
-rewardmedi()
-salti()
+# print('epochsBoxplot')
+# epochsBoxplot()
+# print('getJumpsPerPool')
+# getJumpsPerPool()
+# print('getUsersNetwork')
+# getUsersNetwork()
+# print('contaRWT')
+# contaRWT()
+# print('contaIndirizzi')
+# contaIndirizzi()
+# print('rewardmedi')
+# rewardmedi()
+# print('contaHoppers')
+del RWTs
+# contaHoppers()
+# print('baractive')
+# baractive()
+# print('boxplotwindow')
+# boxplotwindow()
+# print('rewards')
+# rewards()
+# print('salti')
+# salti()
+# print('getPoolMiners')
+# getPoolMiners()

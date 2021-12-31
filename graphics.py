@@ -9,11 +9,16 @@ from datetime import datetime
 import statistics
 import networkx as nx
 import matplotlib
+
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter, date2num
 import numpy as np
 import pandas as pd
 import gc
+
+plt.rcParams['font.size'] = 22
 
 def epochsBoxplot():
     print('epochs boxplots')
@@ -38,17 +43,17 @@ def epochsBoxplot():
             l2.append(length)
     blist.append(l2)
     labels = ['Before', 'After']
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Epochs length', fontsize=20)
+    plt.ylabel('Epochs length (h)')
     #yint = range(min, max+1)
     #plt.yticks(yint)
     plt.boxplot(blist, vert = True, labels=labels)
     plt.yscale('log')
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('epochs.png')
 
     print('epochs length per pool')
 
@@ -79,16 +84,16 @@ def epochsBoxplot():
     finallist.append(epochsF2)
     finallist.append(epochsHuobi)
     finallist.append(epochsPoolin)
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool', 'PoolinPool']
-    fig, ax = plt.subplots(figsize=(100, 100))
+    labels = ['Ant', 'BTC', 'F2', 'Huobi', 'Poolin']
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Epochs length', fontsize=20)
+    plt.ylabel('Epochs length (h)')
     plt.boxplot(finallist, vert = True, labels=labels)
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.yscale('log')
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('epochSchedule.png')
 
 def getJumpsPerPool():
     antbtc = 0
@@ -188,17 +193,17 @@ def getJumpsPerPool():
     x = np.arange(10)  # the label locations
     width = 0.35  # the width of the bars
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(15, 10))
     ax.grid(axis='y')
     rects1 = ax.bar(x - width/2, l1, width, color='lightblue')
     rects2 = ax.bar(x + width/2, l2, width, color='#fc8d62')
 
-    ax.set_ylabel('Migrations of overall population', fontsize=20)
-    ax.set_xlabel('Cross-pooling', fontsize=20)
+    ax.set_ylabel('Migrations of overall population')
+    ax.set_xlabel('Cross-pooling')
     ax.set_xticks(x)
     ax.set_xticklabels(ind, fontsize=12)
 
-    plt.show()
+    fig.savefig('Cross-pooling.png')
 
     li = []
     jumpsBTC = 0
@@ -224,11 +229,11 @@ def getJumpsPerPool():
     li.append(jumpsF2/19616)
     li.append(jumpsHuobi/7566)
     li.append(jumpsPoolin/3192)
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool', 'PoolinPool']
-    plt.figure(figsize=(100, 100))
+    labels = ['Ant', 'BTC', 'F2', 'Huobi', 'Poolin']
+    plt.figure(figsize=(15, 10))
     plt.bar(labels, li, width=0.35, color='lightblue')
     plt.ylabel("Desertation rate on total population")
-    plt.show()
+    fig.savefig('DesertationRate.png')
 
 def getUsersNetwork():
 
@@ -237,7 +242,7 @@ def getUsersNetwork():
     minersList = []
     hoppersList = []
     labels = {}
-    plt.figure(figsize=(100, 100))
+    plt.figure(figsize=(10, 10))
     G = nx.Graph()
     G.add_node('BTCPool')
     G.add_node('F2Pool')
@@ -278,7 +283,7 @@ def getUsersNetwork():
     nx.draw_networkx_edges(G, layout, width=0.3, edge_color="#cccccc")
     nx.draw_networkx_labels(G, layout, labels, font_size=10, font_color='k')
     plt.axis('off')
-    plt.show()
+    plt.savefig('UsersNetwork.png')
 
 def contaRWT():
 
@@ -400,8 +405,8 @@ def baractive():
     countHuobi = 0
     countPoolin = 0
 
-    for h in epochs:
-        for epoch in epochs[h]:
+    for h in epochSchedule:
+        for epoch in epochSchedule[h]:
 
             if epoch['pool'] == 'AntPool':
                 countAnt += 1
@@ -457,12 +462,12 @@ def baractive():
     finlist.append(huobilist)
     finlist.append(poolinlist)"""
 
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool', 'PoolinPool']
-    plt.figure(figsize=(100, 100))
+    labels = ['Ant', 'BTC', 'F2', 'Huobi', 'Poolin']
+    plt.figure(figsize=(10, 10))
     plt.bar(labels, finlist, width=0.35, color='lightblue')
-    plt.ylabel('Percentage of overlapped epoch', fontsize=20)
-    plt.xticks(fontsize=20)
-    plt.show()
+    plt.ylabel('Percentage of overlapped epoch')
+    #plt.xticks(fontsize=20)
+    plt.savefig('overlappedEpoch.png')
 
 # ---------------------FUNZIONE 7
 def boxplotwindow():
@@ -497,16 +502,16 @@ def boxplotwindow():
     finlist.append(huobiw)
     finlist.append(poolinw)
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Median percentage of window coverage', fontsize=20)
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool','PoolinPool']
+    plt.ylabel('Median percentage of window coverage')
+    labels = ['Ant', 'BTC', 'F2', 'Huobi','Poolin']
     plt.boxplot(finlist, vert = True, whis=[5,95], labels=labels)
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.yscale('log')
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('windowCoverage.png')
 
     antw = []
     btcw = []
@@ -541,16 +546,16 @@ def boxplotwindow():
     finlist.append(huobiw)
     finlist.append(poolinw)
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Median percentage of rounds lengths in a windows', fontsize=20)
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool','PoolinPool']
+    plt.ylabel('Median percentage of rounds lengths in a windows')
+    labels = ['Ant', 'BTC', 'F2', 'Huobi','Poolin']
     plt.boxplot(finlist, vert = True, whis=[5,95], labels=labels)
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.yscale('log')
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('roundsLengths.png')
 
 
 def rewards():
@@ -663,37 +668,37 @@ def rewards():
     totliste.append(inactivehe)
     totlistemed.append(inactivehemed)
 
-    labels = ['Miners', 'Cross-epoch hoppers', 'Intra-epoch hoppers']
+    labels = ['Miners', 'Cross-epoch h.', 'Intra-epoch h.']
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Frequency of earnings per user', fontsize=20)
+    plt.ylabel('Average of time between earnings (s)')
     plt.boxplot(totlistf, vert = True, whis=[5,95], labels=labels)
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.yscale('log')
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('earningsPerUser.png')
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Total earning per user', fontsize=20)
+    plt.ylabel('Average of total earnings per miner (BTC)')
     plt.boxplot(totliste, vert = True, whis=[5,95], labels=labels)
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.yscale('log')
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('TotalEarningPerUser.png')
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Median earnings per user', fontsize=20)
+    plt.ylabel('Average earnings per miner (BTC)')
     plt.boxplot(totlistemed, vert = True, whis=[5,95], labels=labels)
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.yscale('log')
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('MedianEarningsPerUser.png')
 
 def rewardmedi():
 
@@ -755,27 +760,27 @@ def rewardmedi():
     lens.append(hh)
     lens.append(pp)
 
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool','PoolinPool']
+    labels = ['Ant', 'BTC', 'F2', 'Huobi','Poolin']
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Average amount of BTC sent', fontsize=20)
+    plt.ylabel('Average amount of BTC sent')
     plt.boxplot(dimensions, vert = True, labels=labels)
     plt.yscale('log')
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('BTCSent.png')
 
-    fig, ax = plt.subplots(figsize=(100, 100))
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.grid(axis='y')
-    plt.ylabel('Number of outgoing transfers', fontsize=20)
+    plt.ylabel('Number of outgoing transfers')
     plt.boxplot(lens, vert = True, labels=labels)
     plt.yscale('log')
-    plt.xticks(fontsize=20)
-    plt.yticks(fontsize=16)
+    #plt.xticks(fontsize=20)
+    #plt.yticks(fontsize=16)
     plt.autoscale(True)
-    plt.show()
+    fig.savefig('outgoingTransfers.png')
 
 def salti():
     li = []
@@ -802,12 +807,12 @@ def salti():
     li.append(jumpsF2/7458)
     li.append(jumpsHuobi/6862)
     li.append(jumpsPoolin/737)
-    labels = ['AntPool', 'BTCPool', 'F2Pool', 'HuobiPool', 'PoolinPool']
-    plt.figure(figsize=(100, 100))
+    labels = ['Ant', 'BTC', 'F2', 'Huobi', 'Poolin']
+    plt.figure(figsize=(10, 10))
     plt.bar(labels, li, width=0.35, color='lightblue')
-    plt.ylabel("Desertation rate on total population", fontsize=20)
-    plt.xticks(fontsize=20)
-    plt.show()
+    plt.ylabel("Desertation rate on total population")
+    #plt.xticks(fontsize=20)
+    plt.savefig('DesertationRate2.png')
 
 # -----------------------------------------------------------------------
 
